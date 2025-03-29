@@ -1,0 +1,9 @@
+<div [ngClass]="{'flex-row': !isMobileView, 'flex-col': isMobileView}" class="flex">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  
+  <!-- Main Content -->
+  <div class="flex-1 px-48 pt-40">
+    <app-delivery-list></app-delivery-list>
+  </div>
+</div>

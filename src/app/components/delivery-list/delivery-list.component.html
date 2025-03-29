@@ -1,0 +1,90 @@
+<div class="flex w-[100%]">
+    <div class="w-[100%]">
+      <h3 class="header-font text-[1.7rem] text-[#a8393a]" [ngClass]="{'mb-12 ml-8': !isMobileView, 'mb-1 ml-2 mt-1': isMobileView}">Delivery list</h3>
+      
+      <table class="min-w-full bg-white text-[0.8rem]">
+        <thead>
+          <tr class="border-b border-b-[2px] border-black mb-2">
+            <th class="border-r border-black text-left" [ngClass]="{'w-[12%]': !isMobileView, 'w-[25%]': isMobileView}">First Name</th>
+            <th class="border-r border-black text-left" [ngClass]="{'w-[12%]': !isMobileView, 'w-[25%]': isMobileView}">Last Name</th>
+            <th class="border-r border-black text-left" [ngClass]="{'w-[40%]': !isMobileView, 'w-[25%]': isMobileView}">Address</th>
+            <th class="text-left" [ngClass]="{'w-[36%]': !isMobileView, 'w-[25%]': isMobileView}">Wishes</th>
+          </tr>
+        </thead>
+        <tbody class="mt-2">
+          <!-- Loop through deliveryList -->
+            <ng-container *ngFor="let person of deliveryList">
+                <tr [ngClass]="{'bg-[#eeb3b3]': isHighlighted(person)}">
+                <td class="border-r border-black">{{ person.firstName }}</td>
+                <td class="border-r border-black">{{ person.lastName }}</td>
+                <td class="border-r border-black">{{ person.address }}</td>
+                <td>{{ person.wish }}</td>
+                </tr>
+        
+                <!-- Insert 20 empty rows immediately after Agatha Christie's row -->
+                <ng-container *ngIf="person.firstName === 'Agatha' && person.lastName === 'Christie'">
+                <tr *ngFor="let _ of emptyRows">
+                    <tr *ngFor="let _ of emptyRows; let i = index">
+                        <td class="border-r border-black">&nbsp;</td>
+                        <td class="border-r border-black">&nbsp;</td>
+                        <td class="relative border-r border-black">
+                          <!-- Apply dotted line only for rows 2 to 9 -->
+                          <div *ngIf="i > 0 && i < emptyRows.length - 1" 
+                               class="absolute top-0 bottom-0 left-[50%] w-0.5 border-l border-dotted border-gray-400">
+                          </div>
+                        </td>
+                        <td>&nbsp;</td>
+                </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+      </table>
+  
+      <!-- Pagination -->
+      <div class="mt-4">
+        <ul class="flex space-x-2 text-[0.8rem]">
+        <li>
+            <a class="text-white bg-[#49825f] rounded-[50%] p-1" href="#">
+                <i class="fas fa-arrow-left text-[0.7rem]">
+                </i>
+            </a>
+        </li>
+          <!-- Display first 5 pages -->
+          <ng-container *ngFor="let page of pages.slice(0, 5)">
+            <li>
+              <a [ngClass]="{'text-[#a8393a]': page === 18, 'text-[#49825f]': page !== 18}" href="#">
+                {{ page }}
+              </a>
+            </li>
+          </ng-container>
+      
+          <!-- Add '...' after 5th page -->
+          <li><span class="text-gray-500">...</span></li>
+      
+          <!-- Display page 18 with red highlight -->
+          <li>
+            <a class="text-[#a8393a]" href="#">18</a>
+          </li>
+      
+          <!-- Add '...' before page 37 -->
+          <li><span class="text-gray-500">...</span></li>
+      
+          <!-- Display last few pages -->
+          <ng-container *ngFor="let page of pages.slice(6)">
+            <li>
+              <a [ngClass]="{'text-red-500 font-bold': page === 18, 'text-[#49825f]': page !== 18}" href="#">
+                {{ page }}
+              </a>
+            </li>
+          </ng-container>
+          <li>
+            <a class="text-white bg-[#49825f] rounded-[50%] p-1" href="#">
+             <i class="fa fa-arrow-right text-[0.7rem]">
+             </i>
+            </a>
+           </li>
+        </ul>
+      </div>
+    </div>
+    <img src="assets/palm-icon.png" alt="Palm Tree" class="palm-tree">
+</div>

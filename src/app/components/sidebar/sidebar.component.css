@@ -1,0 +1,52 @@
+.active-nav {
+    position: relative;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)); /* Fading effect */
+    border-radius: 5px;
+}
+
+.active-nav::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+  
+.santa-logo {
+    width: 80px;
+  }
+
+    @media (max-width: 768px) {
+        .w-48 {
+            width: 100%; /* Sidebar takes full width */
+        }
+    
+        .min-h-screen {
+            min-height: auto; /* Remove full height */
+        }
+    
+        .hidden {
+            display: none; /* Initially hide the menu */
+        }
+    
+        .block {
+            display: block; /* Show menu when toggled */
+        }
+    
+        ul {
+            width: 100%;
+            background-color: #2f855a; /* Keep background consistent */
+            position: absolute;
+            top: 60px; /* Place it just below the navbar */
+            left: 0;
+            z-index: 10;
+        }
+    
+        li {
+            padding: 10px;
+            border-bottom: 1px solid white;
+        }
+    }

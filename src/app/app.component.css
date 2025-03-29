@@ -1,0 +1,24 @@
+ @media (max-width: 1024px) { /* Target tablets */
+
+    .flex-1 {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+
+@media (max-width: 768px) { /* Mobile */
+  .flex-1 {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+  }
+
+  /* Ensure the sidebar takes full width and does not push content down */
+  app-sidebar {
+      width: 100%;
+  }
+}

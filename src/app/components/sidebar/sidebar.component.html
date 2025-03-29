@@ -1,0 +1,65 @@
+ <!-- Sidebar -->
+ <!-- for desktop and tablet view -->
+ <div *ngIf="!isMobileView" class="bg-green-800 text-white w-48 min-h-screen py-4 flex flex-col justify-between">
+    <div>
+        <div class="flex flex-col items-center">
+            <img src="assets/santa-icon.png" alt="Santa Icon" class="santa-logo">
+            <h1 class="header-font text-3xl text-[#86352f] mt-4">Santa Inc.</h1>
+            <p class="text-[0.7rem] text-light mt-3 pr-2 self-end text-right">V4.1.2</p>
+          </div>
+          <div>
+              <nav class="mt-8">
+                  <ul>
+                  <li>
+                      <a class="flex items-center pl-2" href="#">
+                      <img src="assets/video.png" alt="Santa Icon" height="25" width="30"> Toys Factory
+                      </a>
+                  </li>
+                  <li class="mb-12">
+                      <a class="flex items-center active-nav pl-2" href="#">
+                      <img src="assets/delivery.png" alt="Santa Icon" height="25" width="30"> Delivery
+                      </a>
+                  </li>
+                  <li class="mb-12">
+                      <a class="flex items-center pl-2" href="#">
+                      <img src="assets/taraju.png" alt="Santa Icon" height="25" width="30"> Legal
+                      </a>
+                  </li>
+                  <li>
+                      <a class="flex items-center pl-2" href="#">
+                      <img src="assets/power.png" alt="Santa Icon" height="25" width="30"> Disconnect
+                      </a>
+                  </li>
+                  </ul>
+              </nav>
+          </div>
+    </div>
+    
+    
+    <div class="text-center text-xs mb-0 text-[#85b296]">
+      <p>All rights reserved</p>
+    </div>
+  </div>
+
+  <!-- for mobile screen -->
+<div *ngIf="isMobileView" class="bg-green-800 text-white w-full min-h-screen flex px-2 justify-between">
+    <!-- Left: Hamburger Menu -->
+    <div>
+        <button class="text-white text-5xl" (click)="toggleMenu()">
+            &#9776;
+        </button>
+        <ul [ngClass]="{'hidden': !isMenuOpen, 'block': isMenuOpen}" class="md:flex md:space-x-4 md:ml-4">
+            <li><a class="flex items-center pl-2" href="#"><img src="assets/video.png" height="25" width="30"> Toys Factory</a></li>
+            <li><a class="flex items-center active-nav pl-2" href="#"><img src="assets/delivery.png" height="25" width="30"> Delivery</a></li>
+            <li><a class="flex items-center pl-2" href="#"><img src="assets/taraju.png" height="25" width="30"> Legal</a></li>
+            <li><a class="flex items-center pl-2" href="#"><img src="assets/power.png" height="25" width="30"> Disconnect</a></li>
+        </ul>
+    </div>
+
+    <!-- Right: Santa Inc and Version -->
+    <div class="text-right">
+        <h1 class="header-font text-3xl text-[#86352f]">Santa Inc.</h1>
+        <p class="text-[0.7rem] text-light mt-1 text-[#85b296]">V4.1.2</p>
+    </div>
+</div>
+
