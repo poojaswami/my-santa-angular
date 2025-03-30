@@ -7,13 +7,14 @@ import { Component, HostListener, OnInit  } from '@angular/core';
 })
 export class DeliveryListComponent implements OnInit {
   isMobileView: boolean = false;
-
+  isTabletView: boolean = false;
   ngOnInit() {
     this.checkScreenSize();
   }
 
-  @HostListener('window:resize', [])
+  @HostListener('window:resize', ['$event'])
   checkScreenSize() {
+    this.isTabletView = window.innerWidth >= 768 && window.innerWidth < 1024;
     this.isMobileView = window.innerWidth <= 768;
   }
   deliveryList = [

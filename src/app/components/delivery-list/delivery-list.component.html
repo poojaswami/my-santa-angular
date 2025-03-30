@@ -1,8 +1,15 @@
 <div class="flex w-[100%]">
     <div class="w-[100%]">
-      <h3 class="header-font text-[1.7rem] text-[#a8393a]" [ngClass]="{'mb-12 ml-8': !isMobileView, 'mb-1 ml-2 mt-1': isMobileView}">Delivery list</h3>
+      <h3 class="header-font text-[1.7rem] text-[#a8393a]" style="text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.4);" 
+      [ngClass]="{
+        'mb-12 ml-8': !isMobileView && !isTabletView, 
+        'mb-4 ml-6 mt-4': isTabletView, 
+        'mb-1 ml-2 mt-1': isMobileView
+      }">Delivery list</h3>
       
-      <table class="min-w-full bg-white text-[0.8rem]">
+      <table class="min-w-full bg-white text-[0.8rem]" [ngClass]="{ 
+        'h-[74vh]': isTabletView || isMobileView,
+      }">
         <thead>
           <tr class="border-b border-b-[2px] border-black mb-2">
             <th class="border-r border-black text-left" [ngClass]="{'w-[12%]': !isMobileView, 'w-[25%]': isMobileView}">First Name</th>
@@ -14,11 +21,15 @@
         <tbody class="mt-2">
           <!-- Loop through deliveryList -->
             <ng-container *ngFor="let person of deliveryList">
-                <tr [ngClass]="{'bg-[#eeb3b3]': isHighlighted(person)}">
+                <tr *ngIf="!(isMobileView && ((person.firstName === 'William' && person.lastName === 'Shakespeare') || 
+                (person.firstName === 'Agatha' && person.lastName === 'Christie')))" [ngClass]="{'bg-[#eeb3b3] font-semibold': isHighlighted(person)}">
                 <td class="border-r border-black">{{ person.firstName }}</td>
                 <td class="border-r border-black">{{ person.lastName }}</td>
                 <td class="border-r border-black">{{ person.address }}</td>
-                <td>{{ person.wish }}</td>
+                <td>
+                  <span *ngIf="isMobileView">{{ person.wish.length > 4 ? (person.wish | slice:0:4) + '...' : person.wish }}</span>
+                  <span *ngIf="!isMobileView">{{ person.wish }}</span>
+                </td>
                 </tr>
         
                 <!-- Insert 20 empty rows immediately after Agatha Christie's row -->
@@ -26,10 +37,15 @@
                 <tr *ngFor="let _ of emptyRows">
                     <tr *ngFor="let _ of emptyRows; let i = index">
                         <td class="border-r border-black">&nbsp;</td>
-                        <td class="border-r border-black">&nbsp;</td>
+                        <td class="relative border-r border-black">&nbsp;
+                          <!-- Show vertical dotted line only in mobile view and only for rows 2 to 9 -->
+                          <div *ngIf="isMobileView && i > 0 && i < emptyRows.length - 1" 
+                              class="absolute top-0 bottom-0 left-[50%] w-0.5 border-l border-dotted border-gray-400">
+                          </div>
+                        </td>
                         <td class="relative border-r border-black">
                           <!-- Apply dotted line only for rows 2 to 9 -->
-                          <div *ngIf="i > 0 && i < emptyRows.length - 1" 
+                          <div *ngIf="!isMobileView && i > 0 && i < emptyRows.length - 1" 
                                class="absolute top-0 bottom-0 left-[50%] w-0.5 border-l border-dotted border-gray-400">
                           </div>
                         </td>
@@ -59,7 +75,7 @@
           </ng-container>
       
           <!-- Add '...' after 5th page -->
-          <li><span class="text-gray-500">...</span></li>
+          <li><span class="text-gray-500">..</span></li>
       
           <!-- Display page 18 with red highlight -->
           <li>
@@ -67,7 +83,7 @@
           </li>
       
           <!-- Add '...' before page 37 -->
-          <li><span class="text-gray-500">...</span></li>
+          <li><span class="text-gray-500">..</span></li>
       
           <!-- Display last few pages -->
           <ng-container *ngFor="let page of pages.slice(6)">

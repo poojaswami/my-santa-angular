@@ -14,10 +14,24 @@
     background-color: #fff;
     border-radius: 2px;
 }
+
+.custom-margin-top{
+    margin-top: 1.5rem;
+}
   
 .santa-logo {
     width: 80px;
   }
+
+  @media (max-width: 1024px) {
+    .santa-logo {
+        display: none;
+    }
+
+    .custom-margin-top{
+        margin-top: 0rem;
+    }
+}
 
     @media (max-width: 768px) {
         .w-48 {
